@@ -1,0 +1,15 @@
+Django>=4.2
+gunicorn
+dj-database-url
+psycopg2-binary
+djangorestframework
+django-cors-headers
+cloudinary
+django-cloudinary-storage
+tflite-runtime==2.14.0
+opencv-python-headless
+numpy==1.26.4
+scikit-image
+Pillow
+whitenoise
+python-dotenv

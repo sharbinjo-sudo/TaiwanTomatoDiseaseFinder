@@ -1,20 +1,22 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'dart:io' show File; // ✅ Still okay on mobile
-import 'package:flutter/foundation.dart' show kIsWeb; // ✅ Detect Web
+import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  // ✅ Dynamically choose correct base URL for each platform
-  static String get baseUrl {
-  if (kIsWeb) {
-    return "http://127.0.0.1:8000/api";
-  } else {
-    // Real device (Android phone)
-    return "http://10.236.164.90:8000/api";
-  }
-}
 
+  static String get baseUrl {
+    if (kIsWeb) {
+      return "http://127.0.0.1:8000/api";
+    } else if (Platform.isAndroid) {
+      return "http://10.14.161.90:8000/api";
+    } else if (Platform.isIOS) {
+      return "http://127.0.0.1:8000/api";
+    } else {
+      return "http://127.0.0.1:8000/api";
+    }
+  }
 
   // 📸 Upload image (mobile / desktop)
   static Future<Map<String, dynamic>> uploadImage(File file) async {
@@ -53,9 +55,12 @@ class ApiService {
     }
   }
 
-  // 🧩 Automatically pick the correct upload method
-  static Future<Map<String, dynamic>> upload(dynamic file,
-      {Uint8List? bytes, String? fileName}) async {
+  // 🧩 Automatically pick correct method
+  static Future<Map<String, dynamic>> upload(
+    dynamic file, {
+    Uint8List? bytes,
+    String? fileName,
+  }) async {
     if (kIsWeb) {
       if (bytes == null || fileName == null) {
         throw Exception("Web upload requires bytes and fileName");

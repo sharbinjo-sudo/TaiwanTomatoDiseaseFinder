@@ -5,6 +5,7 @@ class PredictionRecord(models.Model):
     predicted_label = models.CharField(max_length=255)
     confidence = models.FloatField()
     model_type = models.CharField(max_length=50, default="CNN")
+    true_label = models.CharField(max_length=100, blank=True, null=True)
 
     cloudinary_original_id = models.CharField(max_length=255, null=True, blank=True)
     cloudinary_preprocessed_id = models.CharField(max_length=255, null=True, blank=True)

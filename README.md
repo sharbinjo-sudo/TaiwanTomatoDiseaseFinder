@@ -256,3 +256,9 @@ Tomato Disease Detection System
 Built using Vision Transformer and Flutter-Django architecture.
 
 ---
+
+## ⚠️ Note
+
+Now Working perfectly in miui OS(Android 10) others may break due to improper storage permission.
+
+---
